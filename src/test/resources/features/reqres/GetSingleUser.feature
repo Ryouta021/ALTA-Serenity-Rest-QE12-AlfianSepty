@@ -1,5 +1,5 @@
+@TUGAS
 Feature: Get single user
-  @TUGAS
 #positive case
   Scenario Outline: Get single user with valid parameter page
     Given Single user with valid parameter <page>

@@ -1,5 +1,6 @@
+@TUGAS
 Feature: Login
-  @TUGAS
+
 #    positive case
   Scenario: Post login with valid json
     Given login with valid json "Account.json"

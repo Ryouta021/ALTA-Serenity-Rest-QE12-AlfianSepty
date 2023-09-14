@@ -1,5 +1,5 @@
+@TUGAS
 Feature: Register
-  @TUGAS
 #    positive case
   Scenario: Post Register with valid json
     Given Register with valid json "RegisterValid.json"
