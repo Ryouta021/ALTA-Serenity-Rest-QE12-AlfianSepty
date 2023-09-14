@@ -16,6 +16,13 @@ public class ReqresAPI {
 
     public static String DELETE_USER = Constants.BASE_URL+"/api/users/{id}";
 
+<<<<<<< Updated upstream
+=======
+    public static String GET_SINGLE_USER = Constants.BASE_URL+"/api/users/{page}";
+    public static String POST_LOGIN = Constants.BASE_URL+"/api/login";
+    public static String POST_REGISTER = Constants.BASE_URL+"/api/register";
+
+>>>>>>> Stashed changes
     @Step("Get List User")
     public void getListUser(int page){
         SerenityRest.given()
@@ -39,6 +46,26 @@ public class ReqresAPI {
         SerenityRest.given()
                 .pathParam("id",id);
     }
+<<<<<<< Updated upstream
+=======
+    @Step("Get single user")
+    public void getSingleUser(int page){
+        SerenityRest.given()
+                .pathParam("page",page);
+    }
+    @Step("Post login")
+    public void postLogin(File json){
+        SerenityRest.given()
+                .contentType(ContentType.JSON)
+                .body(json);
+    }
+    @Step("Post login")
+    public void postRegister(File json){
+        SerenityRest.given()
+                .contentType(ContentType.JSON)
+                .body(json);
+    }
+>>>>>>> Stashed changes
 }
 
 
