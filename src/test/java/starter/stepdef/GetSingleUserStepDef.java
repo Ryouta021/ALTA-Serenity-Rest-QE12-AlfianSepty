@@ -1,20 +1,25 @@
 package starter.stepdef;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.restassured.module.jsv.JsonSchemaValidator;
 import net.serenitybdd.rest.SerenityRest;
 import net.thucydides.core.annotations.Steps;
 import starter.reqres.GetSingleUserAPI;
-import starter.reqres.ReqresAPI;
+import starter.reqres.ReqresResponses;
+import starter.utils.Constants;
+
+import java.io.File;
+
+import static org.hamcrest.Matchers.equalTo;
+
 
 public class GetSingleUserStepDef {
     @Steps
     GetSingleUserAPI getSingleUser;
-    @Given("Single user with valid parameter {int}")
-    public void singleUserWithValidParameter(int page ) {
-        getSingleUser.getSingleUser(page);
-    }
+
 
     @When("Send request get single user")
     public void sendRequestGetSingleUser() {
@@ -33,5 +38,23 @@ public class GetSingleUserStepDef {
     @Then("Status code should be {int} not found")
     public void statusCodeShouldBeNotFound(int notFound) {
         SerenityRest.then().statusCode(notFound);
+    }
+
+    @Given("Single user with valid id {int}")
+    public void singleUserWithValidId(int id) {
+        getSingleUser.getSingleUser(id);
+    }
+
+    @And("Response body id should be {int}")
+    public void responseBodyIdShouldBe(int id ) {
+        SerenityRest.then().body(ReqresResponses.DATA_ID,equalTo(id));
+    }
+
+    @And("Validate get single user JSON schema {string}")
+    public void validateGetSingleUserJSONSchema(String jsonFile) {
+        File json = new File(Constants.JSON_SCHEMA+jsonFile);
+        SerenityRest.and()
+                .assertThat()
+                .body(JsonSchemaValidator.matchesJsonSchema(json));
     }
 }
