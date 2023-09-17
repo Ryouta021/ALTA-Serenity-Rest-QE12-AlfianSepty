@@ -45,11 +45,6 @@ public class GetSingleUserStepDef {
         getSingleUser.getSingleUser(id);
     }
 
-    @And("Response body id should be {int}")
-    public void responseBodyIdShouldBe(int id ) {
-        SerenityRest.then().body(ReqresResponses.DATA_ID,equalTo(id));
-    }
-
     @And("Validate get single user JSON schema {string}")
     public void validateGetSingleUserJSONSchema(String jsonFile) {
         File json = new File(Constants.JSON_SCHEMA+jsonFile);

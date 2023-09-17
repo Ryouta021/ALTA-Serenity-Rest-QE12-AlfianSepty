@@ -10,3 +10,4 @@ Feature: Register
     Given Register with invalid json "RegisterInvalid.json"
     When Send request post register
     Then Status code should be 400 Bad Request
+    And Validate Post register user JSON Schema "InvalidRegister.json"

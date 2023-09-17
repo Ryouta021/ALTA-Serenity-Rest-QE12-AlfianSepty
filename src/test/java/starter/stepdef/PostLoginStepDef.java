@@ -1,12 +1,13 @@
 package starter.stepdef;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.restassured.module.jsv.JsonSchemaValidator;
 import net.serenitybdd.rest.SerenityRest;
 import net.thucydides.core.annotations.Steps;
 import starter.reqres.PostLoginAPI;
-import starter.reqres.ReqresAPI;
 import starter.utils.Constants;
 
 import java.io.File;
@@ -35,5 +36,13 @@ public class PostLoginStepDef {
     @Then("Status code should be {int} Bad Request")
     public void statusCodeShouldBeBadRequest(int badRequest) {
         SerenityRest.then().statusCode(badRequest);
+    }
+
+    @And("Validate Post Login user JSON Schema {string}")
+    public void validatePostLoginUserJSONSchema(String jsonFile) {
+        File json = new File(Constants.JSON_SCHEMA+jsonFile);
+        SerenityRest.and()
+                .assertThat()
+                .body(JsonSchemaValidator.matchesJsonSchema(json));
     }
 }
